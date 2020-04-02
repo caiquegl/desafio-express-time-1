@@ -78,8 +78,11 @@ const homeController = {
       email,
       title: 'Contato'
     });
+    
 
-
+  },
+  login:(req,res)=>{
+    res.render('login', {title:'Login'})
   },
 
 

@@ -16,4 +16,8 @@ router.get('/cadastro',homeController.cadastro)
 
 router.post('/cadastro',homeController.usuario)
 
+router.get('/login',homeController.login)
+
+// router.post('/cadastro',homeController.usuario)
+
 module.exports = router;
