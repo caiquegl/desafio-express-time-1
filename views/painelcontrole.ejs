@@ -1,0 +1,24 @@
+<%- include('./partials/header') %>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+          <h1>Lista de usuarios</h1>
+        <% for(usuario of usuarios) { %>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%=usuario.nome%></h5>
+                    <small>Email: <%=usuario.email%></small>
+                  </div>
+                  <p class="mb-1">Mensagem: <%=usuario.mensagem%></p>
+                </a>
+
+            </div>
+
+            <%  } %>
+      </div>
+    </div>
+    </div>
+<%- include('./partials/footer') %>

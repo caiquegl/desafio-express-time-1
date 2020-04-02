@@ -9,7 +9,6 @@ router.post('/contato', homeController.contato);
 
 router.post('/newsletter',homeController.newsletter);
 
-
 router.get('/listar-contatos',homeController.contatos)
 
 router.get('/cadastro',homeController.cadastro)
@@ -18,6 +17,6 @@ router.post('/cadastro',homeController.usuario)
 
 router.get('/login',homeController.login)
 
-// router.post('/cadastro',homeController.usuario)
+router.post('/login',homeController.logado)
 
 module.exports = router;
