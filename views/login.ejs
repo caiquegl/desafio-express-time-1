@@ -3,7 +3,10 @@
     <h1>Login</h1>
     
     <div class="alert alert-success mt-5 alert-login">
-
+        <% if (locals.mensagem) { %>
+            <div class="alert alert-success danger" ><%= mensagem %></div>
+          <% } %>
+      
         <form method="POST" action="#">
             <div class="form-group login">
                 <label for="email">Email</label>

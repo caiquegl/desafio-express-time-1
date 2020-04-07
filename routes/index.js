@@ -19,4 +19,6 @@ router.get('/login',homeController.login)
 
 router.post('/login',homeController.logado)
 
+router.get('/painelcontrole',homeController.validando,homeController.painelcontrole)
+
 module.exports = router;

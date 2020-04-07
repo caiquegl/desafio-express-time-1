@@ -3,6 +3,7 @@ const fs = require('fs');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
+
 let fileNewsLetter
 
 const homeController = {
@@ -198,37 +199,50 @@ const homeController = {
   },
   logado:(req,res)=>{
     
-    let {
-      email,
-      password
-    } = req.body;
+    let {email, password} = req.body;
 
-    // novo conteudo
-    let infoLogin = {
-      email,
-      password
-    };
+    
     // caminho e nome do arquivo
     fileUsuario = path.join('db', 'usuarios.json');
-    listaUsuario = fs.readFileSync(fileUsuario, {
-      encoding: 'utf-8'
-    });
+    listaUsuario = fs.readFileSync(fileUsuario, {encoding: 'utf-8'});
     listaUsuario = JSON.parse(listaUsuario);
     
-    index = listaUsuario.findIndex(x => x.email === req.body.email);
-    let usuarioEncontrado = listaUsuario[index];
+    listaUsuario.forEach(element => {
+      
+      if(email == element.email) {
 
-    // Continuar aqui !!!!!!
-    // if(bcrypt.compareSync(req.body.password,ha))
+        if(bcrypt.compareSync(password, element.senhaEncriptada)){
+          req.session.usuario = element.nome;
+          return res.redirect('/painelcontrole');
+        }
+               
+      }
+      
+    });
 
+    res.render('login', {title: "Login", mensagem: "Usuario incorreto"});
 
-    // console.log(usuarioEncontrado);
-
-
-
-
-    res.render('login', {title:'Login'})
   },
+
+  painelcontrole:(req,res)=>{
+    fileUsuario = path.join('db', 'usuarios.json');
+    listaUsuario = fs.readFileSync(fileUsuario, {encoding: 'utf-8'});
+    listaUsuario = JSON.parse(listaUsuario);
+
+    
+
+    res.render('painelcontrole', {title:'Efemera', usuario:req.session.usuario, listaUsuario})
+  },
+
+  validando:(req,res,next)=>{
+    
+    if(!req.session.usuario){
+      res.redirect('/login');
+      
+  }next();
+
+  
+}
 
 
 };
